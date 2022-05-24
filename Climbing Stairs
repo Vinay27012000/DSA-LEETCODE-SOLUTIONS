@@ -1,0 +1,18 @@
+class Solution { 
+    public int climbStairs(int n) {
+    int a[],i=2,j=1;
+        a=new int[46];
+     a[0]=1;
+        a[1]=1;
+        if(n<=1)
+            return n;
+        else{
+        while(j<n){
+            a[i]=a[i-1]+a[i-2];
+            i++;
+            ++j;
+             }
+          }
+        return a[j];
+    }
+}
