@@ -1,16 +1,16 @@
 class Solution {
     public int arithmeticTriplets(int[] nums, int diff) {
-        HashMap<Integer,Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
         int ans = 0;
-        for(int el : nums){
-            map.put(el,map.getOrDefault(el,0)+1);
+        for(int item : nums){
+           list.add(item);
         }
         
         for(int i=0;i<nums.length;i++){
             int one = nums[i] - diff;
             int second = nums[i] + diff;
             
-            if(map.containsKey(one) && map.containsKey(second)){
+            if(list.contains(one) && list.contains(second)){
                     ans++;
             }
         }
