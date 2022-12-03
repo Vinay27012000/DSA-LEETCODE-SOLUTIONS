@@ -8,11 +8,7 @@ class Solution {
             char c=s.charAt(i);
             map.put(c,map.getOrDefault(c,0)+1);
         }
-              map.entrySet().stream()       .sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).forEach(entry -> {
-                    for (int i = 0; i < entry.getValue(); i++) {
-                        sb.append(entry.getKey());
-                    }
-                });
+              map.entrySet().stream()       .sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).forEach(entry -> sb.append(String.valueOf(entry.getKey()).repeat(entry.getValue())));
 				
         return sb.toString();
     }
