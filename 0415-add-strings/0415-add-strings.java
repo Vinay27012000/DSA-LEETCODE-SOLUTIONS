@@ -1,73 +1,20 @@
-class Solution {
-    public String addStrings(String num1, String num2) {
-        int n=0,carry=0;
-        String result="";
-        Stack<Character> s1=new Stack<>();
-        Stack<Character> s2=new Stack<>();
-        for(char c:num1.toCharArray())
-            s1.push(c);
-        for(char c:num2.toCharArray())
-            s2.push(c);
-        
-        if(num1.length()>num2.length()){
-            while(!s2.isEmpty()){
-                
-                n=(s1.pop()-'0')+(s2.pop()-'0');
-                n=n+carry;
-                if(n>9){
-                    carry=1;
-                    n=n%10;
-                 }
-                else{
-                    carry=0;
-                }
-                result=n+""+result;
-                }
-            while(!s1.isEmpty()){
-                n=s1.pop()-'0';
-                n=n+carry;
-                 if(n>9){
-                    carry=1;
-                    n=n%10;
-                 }
-                else{
-                    carry=0;
-                }
-                result=n+""+result;
-            }
-            if(carry==1)
-                result=1+""+result;
+class Solution 
+{
+    public String addStrings(String num1, String num2) 
+    {
+        StringBuilder res=new StringBuilder();
+        int i=num1.length()-1;
+        int j=num2.length()-1;
+        int carry=0;
+        while(i>=0 || j>=0)
+        {
+            int sum=carry;
+            if(i>=0) sum+=num1.charAt(i--)-'0';//converting char to integer
+            if(j>=0) sum+=num2.charAt(j--)-'0';
+            res.append(sum%10);//appending sum
+            carry=sum/10;
         }
-        else{
-             while(!s1.isEmpty()){
-                
-                n=(s1.pop()-'0')+(s2.pop()-'0');
-                n=n+carry;
-                if(n>9){
-                    carry=1;
-                    n=n%10;
-                 }
-                else{
-                    carry=0;
-                }
-                result=n+""+result;
-                }
-            while(!s2.isEmpty()){
-                n=s2.pop()-'0';
-                n=n+carry;
-                 if(n>9){
-                    carry=1;
-                    n=n%10;
-                 }
-                else{
-                    carry=0;
-                }
-                result=n+""+result;
-            } if(carry==1)
-                result=1+""+result;
-        }
-        
-        
-        return result;
+        if(carry!=0) res.append(carry);//appending carry
+        return res.reverse().toString();
     }
 }
