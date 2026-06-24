@@ -1,50 +1,39 @@
 class Solution {
     public long maximumSubarraySum(int[] nums, int k) {
-        long range = k;
+        Map<Integer, Integer> freq = new HashMap<>();
+        
+        long sum = 0;
         long maxSum = 0;
-        int i=0, j;
-        Set<Integer> dSet = new HashSet<>();
-        for (j=0;j<nums.length;j++) {
-            if(range == 0) {
-                break;
-                }
-            if(!dSet.contains(nums[j])) {
-                dSet.add(nums[j]);
-                maxSum += nums[j];
-                range--;
 
-            } else {
-                dSet.clear();
-                if (j!=nums.length-1) {
-                    maxSum = 0;
-                     
-                range = k;
-                j = i++;                
+        int left = 0;
+
+        for (int right = 0; right < nums.length; right++) {
+            // Add current element
+            sum += nums[right];
+            freq.put(nums[right], 
+                     freq.getOrDefault(nums[right], 0) + 1);
+
+            // Keep window size = k
+            if (right - left + 1 > k) {
+                int remove = nums[left];
+                sum -= remove;
+
+                freq.put(remove, freq.get(remove) - 1);
+
+                if (freq.get(remove) == 0) {
+                    freq.remove(remove);
                 }
+
+                left++;
+            }
+
+            // Check if all elements are distinct
+            if (right - left + 1 == k && freq.size() == k) {
+                maxSum = Math.max(maxSum, sum);
             }
         }
-        if(dSet.size()<k) {maxSum = 0;}
-        long sum=maxSum;
-        for (;j<nums.length;j++) {
-            if (dSet.size() == k) {
-                    dSet.remove(nums[i]);
-                    sum -= nums[i++]; 
-                }
-            if(!dSet.contains(nums[j])) {
-                
-                dSet.add(nums[j]);
-                sum += nums[j];
-            } else {
-                dSet.clear();
-                if (j!=nums.length-1) {
-                    sum = 0;
-                    j=i++;
-                }
-            }
-            maxSum = Math.max(maxSum, sum);
-        }
 
-       return maxSum; 
+        return maxSum;
     }
 }
 
