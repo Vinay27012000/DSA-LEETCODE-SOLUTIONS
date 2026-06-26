@@ -2,9 +2,10 @@ class Solution {
     public int maxSum(int[] nums) {
         int maxSum = -1;
         for(int i=0;i<nums.length;i++){
+            int num=getlargestNo(nums[i]);
             for (int j=0;j<nums.length;j++){
                 if(i!=j){
-                    if(getlargestNo(nums[i]) == getlargestNo(nums[j]))
+                    if( num== getlargestNo(nums[j]))
                         maxSum = Math.max(maxSum, nums[i]+nums[j]);
                 }
             }
