@@ -2,8 +2,9 @@ class Solution {
     public boolean validMountainArray(int[] arr) {
         if(arr.length<3) return false;
         boolean mid = false;
-        for (int i=0;i<arr.length-1;i++){
-            if((arr[i] > arr[i+1]) && (i==0)) return false;
+        if((arr[0] >= arr[1])) return false;
+
+        for (int i=1;i<arr.length-1;i++){
             if (arr[i] == arr[i+1]) return false;
             if ((arr[i]>arr[i+1]) && (mid == false)){
                 mid = true;
