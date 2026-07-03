@@ -15,13 +15,9 @@ class Solution {
     
     Map<Integer,Integer> map = new HashMap<>();
     Arrays.sort(result);
-    for(int i=1;i<size;i++){
-        if(result[i] == result[i-1]){
-            continue;
-        }
+    for(int i=0;i<size;i++){
         if(!map.containsKey(result[i]))
             map.put(result[i], i);
-
     }
     for(int i=0;i<size;i++){
         result[i]=map.getOrDefault(nums[i],0);
