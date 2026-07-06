@@ -1,32 +1,23 @@
 class Solution {
     public int countLargestGroup(int n) {
-        Map<Integer,Integer> map = new HashMap<>();
- 
-        for ( int i = 1; i<= 36; i++ ){
-            map.put(i,0);
-        }
- 
-        for (int i =1 ; i<=n;i++){
- 
+    int[] count = new int[37];
+        int maxSize = 0;
+
+        for (int i = 1; i <= n; i++) {
             int sum = getDigitSum(i);
- 
-             map.put(sum,map.get(sum)+1);
- 
+            count[sum]++;
+            maxSize = Math.max(maxSize, count[sum]);
         }
- 
-        int maxValue = Collections.max(map.values());
- 
-        int ans =0;
- 
-         for ( int i = 1; i<= 36; i++ ){
-            if(map.get(i)==maxValue){
-                ans++;
+
+        int result = 0;
+        for (int c : count) {
+            if (c == maxSize) {
+                result++;
             }
         }
- 
-    return ans;
- 
+        return result;
     }
+
  
     public static int getDigitSum(int number) {
     int sum = 0;
