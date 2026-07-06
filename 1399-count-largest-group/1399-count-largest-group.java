@@ -1,6 +1,6 @@
 class Solution {
     public int countLargestGroup(int n) {
-    int[] count = new int[37];
+        int[] count = new int[37];
         int maxSize = 0;
 
         for (int i = 1; i <= n; i++) {
@@ -18,15 +18,14 @@ class Solution {
         return result;
     }
 
- 
     public static int getDigitSum(int number) {
-    int sum = 0;
-    while (number != 0) {
-        sum += number % 10;
-        number /= 10;       
+        int sum = 0;
+        while (number != 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
     }
-    return Math.abs(sum);  
-}
 }
 
 // Synced seamlessly with LeetHub Pro
