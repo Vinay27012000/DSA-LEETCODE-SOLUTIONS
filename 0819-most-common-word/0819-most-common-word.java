@@ -15,8 +15,17 @@ class Solution {
             }
         }
 
+        String result = null;
+        int max = Integer.MIN_VALUE;
 
-        return Collections.max(wordMap.entrySet(), Map.Entry.comparingByValue()).getKey();
+        for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                result = entry.getKey();
+            }
+        }
+
+        return result;
     }
 }
 
