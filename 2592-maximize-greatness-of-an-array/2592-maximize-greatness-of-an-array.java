@@ -2,17 +2,14 @@ class Solution {
     public int maximizeGreatness(int[] nums) {
         Arrays.sort(nums);
         int count=0;
-        Queue<Integer> temp = new ArrayDeque<>();
-        for (int i=nums.length-1;i>0;i--) {
-            if(nums[i]>nums[i-1]) {
+        int p1=0,p2=1; 
+
+        while(p2<nums.length){
+            if(nums[p1]<nums[p2]) {
                 count++;
-            } else if (nums[i] == nums[i-1]){
-                if(!temp.isEmpty() && temp.peek()>nums[i-1]){
-                    count++;
-                    temp.poll();
-                }
-                temp.offer(nums[i]);
+                p1++;
             }
+            p2++;
         }
         return count;
     }
