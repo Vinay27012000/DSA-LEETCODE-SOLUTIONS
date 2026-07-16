@@ -7,10 +7,10 @@ class Solution {
 
         for (int i=0;i<players.length;i++) {
             while(j<trainers.length && players[i]>trainers[j]) {j++;}
-            if (j<trainers.length && players[i]<=trainers[j]) {
-                count ++;j++;
-            }
-            if(j == trainers.length) return count;
+            if (j<trainers.length) {
+                count++;j++;
+            } else 
+             return count;
         }
         return count;
     }
