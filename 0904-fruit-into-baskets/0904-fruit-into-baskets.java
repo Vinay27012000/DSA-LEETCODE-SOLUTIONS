@@ -1,23 +1,38 @@
 class Solution {
     public int totalFruit(int[] fruits) {
-      
-        Map<Integer, Integer> basket = new HashMap<>();
-        int left = 0, maxPicked = 0;
-         
-        for (int right = 0; right < fruits.length; ++right) {
-            basket.put(fruits[right], basket.getOrDefault(fruits[right], 0) + 1);
- 
-            while (basket.size() > 2) {
-                basket.put(fruits[left], basket.get(fruits[left]) - 1);
-                if (basket.get(fruits[left]) == 0)
-                    basket.remove(fruits[left]);
-                left++;
+        if (fruits.length < 3) return fruits.length;
+
+        int b1 = fruits[0];
+        int b2 = -1;
+
+        int p1 = 0;          // start of current window
+        int last = 0;        // start of last continuous block
+        int maxFruits = 0;
+
+        for (int i = 1; i < fruits.length; i++) {
+
+            if (fruits[i] == fruits[i - 1]) {
+                continue;
             }
-             
-            maxPicked = Math.max(maxPicked, right - left + 1);
+
+            if (b2 == -1) {
+                b2 = fruits[i];
+            } else if (fruits[i] != b1 && fruits[i] != b2) {
+                maxFruits = Math.max(maxFruits, i - p1);
+
+                p1 = last;
+
+                b1 = fruits[last];
+                b2 = fruits[i];
+            }
+
+            last = i;
         }
-        
-      
-        return maxPicked;
+
+        return Math.max(maxFruits, fruits.length - p1);
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
