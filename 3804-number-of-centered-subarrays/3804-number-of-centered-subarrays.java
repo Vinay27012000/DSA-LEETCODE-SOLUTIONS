@@ -1,11 +1,12 @@
 class Solution {
     public int centeredSubarrays(int[] nums) {
         int n = nums.length;
-        int ans = 0;
+        int ans = 0,sum=0;
+            Set<Integer> set = new HashSet<>();
 
         for (int i = 0; i < n; i++) {
-            Set<Integer> set = new HashSet<>();
-            int sum = 0;
+            set.clear();
+            sum = 0;
 
             for (int j = i; j < n; j++) {
                 sum += nums[j];
