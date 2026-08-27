@@ -1,34 +1,25 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
- 
-        
-        if(strs == null || strs.length == 0)
-        {
-            return new ArrayList<>();
-        }
-        
-        HashMap<String,ArrayList<String>> fmap = new HashMap<>();
-        for(String str : strs){
-   
-            char[] strArr = str.toCharArray();
-        
-           
-            Arrays.sort(strArr);
-            
-            String sorStr = String.valueOf(strArr);
-            
-            if(fmap.containsKey(sorStr))
-            {
-                fmap.get(sorStr).add(str);  
+        Map<String, List<String>> map = new HashMap<>();
+
+            for(String s1:strs){
+                String key = getPattern(s1);
+                List<String> result = map.getOrDefault(key, new ArrayList<>());
+                result.add(s1);
+                map.put(key, result);
             }
-            else
-            {
-                ArrayList<String> list = new ArrayList<>();
-                list.add(str);
-                fmap.put(sorStr,list); 
-            }
-            
+        return map.values().stream().toList();
+    }
+
+    String getPattern(String str) {
+        int arr[] = new int[26];
+        for(int i=0;i<str.length();i++){
+            arr[str.charAt(i)-'a']++;
         }
-        
-        return new ArrayList<>(fmap.values());  }
+        return Arrays.toString(arr);
+    }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
