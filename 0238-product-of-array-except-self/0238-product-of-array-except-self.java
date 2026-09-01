@@ -1,10 +1,9 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
     int nonZeroProduct = 1;
-    boolean isOneZero = false;
     int zeroCount = 0;
     int totalProduct = 1;
-     for(int i =0;i<nums.length;i++){
+     for(int i=0;i<nums.length;i++){
         totalProduct*=nums[i];
 
         if(nums[i] == 0) {
@@ -14,10 +13,9 @@ class Solution {
         }
         else
             nonZeroProduct*=nums[i];
-        
     }    
     
-    for(int i =0;i<nums.length;i++){
+    for(int i=0;i<nums.length;i++){
         if(nums[i]!=0)
             nums[i]=totalProduct/nums[i];
         else
